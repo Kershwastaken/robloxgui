@@ -1,11 +1,11 @@
 repeat wait() until game:IsLoaded() == true
 if setclipboard then setclipboard("https://discord.gg/VjzccAHzR4")  end
 local Library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = Library:MakeWindow({Name = "beta roblox gui", HidePremium = false, SaveConfig = false, ConfigFolder = "ThanosDaGamerHub"})
+local Window = Library:MakeWindow({Name = "Thanos hub", HidePremium = false, SaveConfig = false, ConfigFolder = "ThanosDaGamerHub"})
 
 Library:MakeNotification({
     Name = "Welcome!",
-    Content = "And by the way, you should join my discord!\nInvite: discord.gg/VjzccAHzR4 (copied to clipboard!)",
+    Content = "And by the way, you should join my discord!\nInvite: VjzccAHzR4("copied to clipboard",
     Image = "rbxassetid://4483345998",
     Time = 10,
 })
@@ -38,16 +38,6 @@ movement:AddSlider({
     ValueName = "GravityToSet",
     Callback = function(v)
         game:GetService("Workspace").Gravity = v
-    end
-    local combat = Window:MakeTab({
-    Name = "Combat",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
+    end    
 })
-local combat = Window:MakeTab({
-    Name = "Combat",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
-})  
 Library:Init()
-
