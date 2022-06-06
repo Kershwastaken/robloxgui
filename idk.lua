@@ -39,7 +39,7 @@ movement:AddSlider({
     Callback = function(v)
         game:GetService("Workspace").Gravity = v
     end
-local comabt = Window:MakeTab({
+local combat = Window:MakeTab({
     Name = "combat",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false,
