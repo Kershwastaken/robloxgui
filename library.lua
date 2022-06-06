@@ -50,5 +50,22 @@ game:GetService("Workspace").Gravity = "1"
 Name = <string> - The name of the button.
 Callback = <function> - The function of the button.
 ]]
+local combat = Window:MakeTab({
+    Name = "Combat",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+combant:AddButton({
+    Name = "aimbot",
+    Callback = function()
+              _G.AimbotInput = "RightClick" -- // RightClick, LeftClick, Q, etc...
+_G.AimbotEasing = 0.2 -- // Stage of Linear Easing to target when enabled
+_G.TeamCheck = true -- // Checks the team of the target to make sure they're not on your team
+
+---------------------------------------------------------------------------------------------------
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-aimbot/main/script.lua"))())
+      end    
+})
 ]]
 OrionLib:Init()
