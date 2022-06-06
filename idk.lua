@@ -20,6 +20,11 @@ local combat = Window:MakeTab({
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false,
 })
+local render = Window:MakeTab({
+    Name = "Render",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false,
+})
 
 movement:AddSlider({
     Name = "WalkSpeed",
@@ -53,22 +58,14 @@ combat:AddButton({
         _G.TeamCheck = true
         loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-aimbot/main/script.lua"))()
     end
- local render = Window:MakeTab({
-    Name = "render",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false,
 })
- Tab:AddButton({
-    Name = "esp",
+render:AddButton({
+    Name = "ESP",
     Callback = function()
-              _G.FriendColor = Color3.fromRGB(0, 0, 255)
-_G.EnemyColor = Color3.fromRGB(255, 0, 0)
-_G.UseTeamColor = false
-
---------------------------------------------------------------------
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-esp/main/esp.lua"))()
-      end    
-})
+	_G.FriendColor = Color3.fromRGB(0, 0, 255)
+	_G.EnemyColor = Color3.fromRGB(255, 0, 0)
+	_G.UseTeamColor = false
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-esp/main/esp.lua"))()
+    end
 })
 Library:Init()
