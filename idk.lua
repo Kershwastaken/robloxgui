@@ -25,6 +25,11 @@ local render = Window:MakeTab({
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false,
 })
+local credits = credits:MakeTab({
+    Name = "credits",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false,
+})
 
 movement:AddSlider({
     Name = "WalkSpeed",
@@ -67,5 +72,17 @@ render:AddButton({
 	_G.UseTeamColor = false
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-esp/main/esp.lua"))()
     end
+})
+credits:AddButton({
+    Name = "a person i will not say cuz he asked",
+    Callback = function()
+              print("button pressed")
+      end
+credits:AddButton({
+    Name = "also me",
+    Callback = function()
+              print("button pressed")
+      end
+})
 })
 Library:Init()
