@@ -1,17 +1,22 @@
 repeat wait() until game:IsLoaded() == true
-if setclipboard then setclipboard("https://discord.gg/VjzccAHzR4")  end
-local Library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+if setclipboard then setclipboard("https://discord.gg/VjzccAHzR4%22")  end
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
 local Window = Library:MakeWindow({Name = "Thanos hub", HidePremium = false, SaveConfig = false, ConfigFolder = "ThanosDaGamerHub"})
 
 Library:MakeNotification({
     Name = "Welcome!",
-    Content = "And by the way, you should join my discord!\nInvite: VjzccAHzR4("copied to clipboard",
+    Content = "And by the way, you should join my discord!\nInvite: VjzccAHzR4(copied to clipboard)",
     Image = "rbxassetid://4483345998",
     Time = 10,
 })
 
 local movement = Window:MakeTab({
     Name = "Movmeent",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false,
+})
+local combat = Window:MakeTab({
+    Name = "Combat",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false,
 })
@@ -26,7 +31,7 @@ movement:AddSlider({
     ValueName = "Speed",
     Callback = function(v)
         game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = v
-    end    
+    end
 })
 movement:AddSlider({
     Name = "Gravity",
@@ -39,22 +44,14 @@ movement:AddSlider({
     Callback = function(v)
         game:GetService("Workspace").Gravity = v
     end
-local combat = Window:MakeTab({
-    Name = "combat",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false,
+})
 combat:AddButton({
-    Name = "aimbot",
+    Name = "Aimbot",
     Callback = function()
-              _G.AimbotInput = "RightClick" -- // RightClick, LeftClick, Q, etc...
-_G.AimbotEasing = 0.2 -- // Stage of Linear Easing to target when enabled
-_G.TeamCheck = true -- // Checks the team of the target to make sure they're not on your team
-
----------------------------------------------------------------------------------------------------
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-aimbot/main/script.lua"))()
-      end    
-})
-})
+        _G.AimbotInput = "RightClick"
+        _G.AimbotEasing = 0.2
+        _G.TeamCheck = true
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-aimbot/main/script.lua"))()
+    end
 })
 Library:Init()
