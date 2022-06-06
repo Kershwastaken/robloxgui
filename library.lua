@@ -1,23 +1,27 @@
 repeat wait() until game:IsLoaded() == true
-if setclipboard then setclipboard("https://discord.gg/VjzccAHzR4")  end
-local Library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = Library:MakeWindow({Name = "ThanosDaGamer's Hub", HidePremium = false, SaveConfig = false, ConfigFolder = "ThanosDaGamerHub"})
+if setclipboard then setclipboard("https://discord.gg/VjzccAHzR4%22")  end
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
+local Window = Library:MakeWindow({Name = "Thanos hub", HidePremium = false, SaveConfig = false, ConfigFolder = "ThanosDaGamerHub"})
 
 Library:MakeNotification({
     Name = "Welcome!",
-    Content = "And by the way, you should join our discord!\nInvite: VjzccAHzR4",
+    Content = "And by the way, you should join my discord!\nInvite: VjzccAHzR4(copied to clipboard)",
     Image = "rbxassetid://4483345998",
     Time = 10,
 })
 
 local movement = Window:MakeTab({
-    Name = "Movement",
+    Name = "Movmeent",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false,
 })
-
 local combat = Window:MakeTab({
     Name = "Combat",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false,
+})
+local render = Window:MakeTab({
+    Name = "Render",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false,
 })
@@ -32,7 +36,7 @@ movement:AddSlider({
     ValueName = "Speed",
     Callback = function(v)
         game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = v
-    end    
+    end
 })
 movement:AddSlider({
     Name = "Gravity",
@@ -45,24 +49,23 @@ movement:AddSlider({
     Callback = function(v)
         game:GetService("Workspace").Gravity = v
     end
-Tab:AddButton({
-    Name = "Button!",
-    Callback = function()
-              print("button pressed")
-      end
-Tab:AddButton({
-    Name = "aimbot",
-    Callback = function()
-              _G.AimbotInput = "RightClick" -- // RightClick, LeftClick, Q, etc...
-_G.AimbotEasing = .1 -- // Stage of Linear Easing to target when enabled
-_G.TeamCheck = true -- // Checks the team of the target to make sure they're not on your team
-
----------------------------------------------------------------------------------------------------
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-aimbot/main/script.lua"))()
-      end 
-
 })
+combat:AddButton({
+    Name = "Aimbot",
+    Callback = function()
+        _G.AimbotInput = "RightClick"
+        _G.AimbotEasing = 0.2
+        _G.TeamCheck = true
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-aimbot/main/script.lua"))()
+    end
 })
+render:AddButton({
+    Name = "ESP",
+    Callback = function()
+	_G.FriendColor = Color3.fromRGB(0, 0, 255)
+	_G.EnemyColor = Color3.fromRGB(255, 0, 0)
+	_G.UseTeamColor = false
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-esp/main/esp.lua"))()
+    end
 })
 Library:Init()
