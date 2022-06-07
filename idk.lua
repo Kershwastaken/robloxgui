@@ -25,7 +25,7 @@ local render = Window:MakeTab({
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false,
 })
-local credits = credits:MakeTab({
+local credits = Window:MakeTab({
     Name = "credits",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false,
@@ -73,16 +73,6 @@ render:AddButton({
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-esp/main/esp.lua"))()
     end
 })
-credits:AddButton({
-    Name = "a person i will not say cuz he asked",
-    Callback = function()
-              print("button pressed")
-      end
-credits:AddButton({
-    Name = "also me",
-    Callback = function()
-              print("button pressed")
-      end
-})
-})
+credits:AddLabel("a person i will not say cuz he asked")
+credits:AddLabel("also me")
 Library:Init()
