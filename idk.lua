@@ -95,10 +95,9 @@ humanoid.Running:Connect(function(speed)
     humanoid.WalkSpeed = 0
     game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame + game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector 
     wait(.25)
-    humanoid.WalkSpeed = 16
-
-
-end
-   
+    humanoid.WalkSpeed = 54
+end)
+ 
+	end
 })
 Library:Init()
