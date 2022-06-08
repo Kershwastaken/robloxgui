@@ -30,6 +30,17 @@ local credits = Window:MakeTab({
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false,
 })
+local bedwars = Window:MakeTab({
+	Name = "bedwars",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--[[
+Name = <string> - The name of the tab.
+Icon = <string> - The icon of the tab.
+PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
+]]
 
 movement:AddSlider({
     Name = "WalkSpeed",
@@ -75,4 +86,19 @@ render:AddButton({
 })
 credits:AddLabel("a person i will not say cuz he asked")
 credits:AddLabel("also me")
+
+bedwars:AddButton({
+	Name = "tpwalk (bypasses)",
+	Callback = function()
+      		local humanoid = game:GetService("Players").LocalPlayer.Character.Humanoid
+humanoid.Running:Connect(function(speed)
+    humanoid.WalkSpeed = 0
+    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame + game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector 
+    wait(.25)
+    humanoid.WalkSpeed = 16
+
+
+end
+   
+})
 Library:Init()
