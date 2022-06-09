@@ -100,12 +100,7 @@ end)
  
 	end
 })
-credits:AddButton({
-    Name = "a person i will not say cuz he asked",
-    Callback = function()
-              print("button pressed")
-      end
-})
+
 combat:AddButton({
     Name = "silent aim",
     Callback = function()
