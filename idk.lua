@@ -36,16 +36,11 @@ local bedwars = Window:MakeTab({
 	PremiumOnly = false
 })
 
---[[
-Name = <string> - The name of the tab.
-Icon = <string> - The icon of the tab.
-PremiumOnly = <bool> - Makes the tab accessible to Sirus Premium users only.
-]]
 
 movement:AddSlider({
     Name = "WalkSpeed",
     Min = 16,
-    Max = 54,
+    Max = 300,
     Default = 5,
     Color = Color3.fromRGB(255, 255, 255),
     Increment = 1,
@@ -53,6 +48,14 @@ movement:AddSlider({
     Callback = function(v)
         game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = v
     end
+})
+movement:AddToggle({
+     Name = "UseCFRame",
+     Default = false,
+     Callback = function(v)
+          shared.USE_CF_INSTEAD = v
+          loadstring(game:HttpGet("https://raw.githubusercontent.com/Thanosdagamer/cframe/main/code"))()
+     end
 })
 movement:AddSlider({
     Name = "Gravity",
