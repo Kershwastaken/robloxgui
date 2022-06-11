@@ -235,7 +235,7 @@ end)
 combat:AddButton({
     Name = "silent aim",
     Callback = function()
-		loadstring(game:HttpGet("https://skillissue.com/getgood/premium/"))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/thanosdagamer/silentaim/main/code.lua"))();
 	end
 })
 gui:AddButton({
