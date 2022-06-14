@@ -216,7 +216,7 @@ render:AddButton({
     end
 })
 credits:AddLabel("a person i will not say cuz he asked")
-credits:AddLabel("also me")
+credits:AddLabel("also me (Ham#6469)")
 
 bedwars:AddButton({
 	Name = "tpwalk (bypasses)",
