@@ -1,7 +1,7 @@
 repeat wait() until game:IsLoaded() == true
 if setclipboard then setclipboard("https://discord.gg/VjzccAHzR4a")  end
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
-local Window = Library:MakeWindow({Name = "Thanos hub", HidePremium = false, SaveConfig = false, ConfigFolder = "ThanosDaGamerHub"})
+local Window = Library:MakeWindow({Name = "Thanos hub", HidePremium = false, SaveConfig = true, ConfigFolder = "ThanosDaGamerHub"})
 
 Library:MakeNotification({
     Name = "Welcome!",
