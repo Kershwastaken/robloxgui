@@ -1,3 +1,5 @@
+--thanks to robloxscripts.com for providing a lot of the coding i need
+
 repeat wait() until game:IsLoaded() == true
 if setclipboard then setclipboard("https://discord.gg/VjzccAHzR4a")  end
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
