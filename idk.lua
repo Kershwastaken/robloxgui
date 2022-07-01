@@ -1,4 +1,5 @@
 --thanks to robloxscripts.com for providing a lot of the coding i need
+local private = shared.private
 
 repeat wait() until game:IsLoaded() == true
 if setclipboard then setclipboard("https://discord.gg/VjzccAHzR4a")  end
