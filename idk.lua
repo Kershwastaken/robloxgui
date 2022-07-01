@@ -217,6 +217,8 @@ render:AddButton({
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-esp/main/esp.lua"))()
     end
 })
+if shared.private = true then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/privatekey/key.lua/key/key.lua"))()
 credits:AddLabel("a person i will not say cuz he asked")
 credits:AddLabel("also me (Ham#6469)")
 
