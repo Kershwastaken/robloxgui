@@ -1,3 +1,5 @@
+--thanks to robloxscripts.com for having a lot of the coding i need
+
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
 local Window = Library.CreateLib("thanos hub", "Ocean")
