@@ -18,7 +18,7 @@ movement:NewSlider("speed", "changes speed", 100, 16, function(s) -- 500 (MaxVal
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
 
-movement:NewSlider("SliderText", "SliderInfo",500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+movement:NewSlider("gravity", "change ur gravity",500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
     game:GetService("Workspace").Gravity = s
 end)
 
