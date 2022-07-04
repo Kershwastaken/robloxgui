@@ -27,14 +27,14 @@ combat:NewButton("aimbot", "rightclick to lock screen on people who arent on tea
         loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-aimbot/main/script.lua"))()
 end)
 combat:NewButton("silent aim", "auto aim no screen lock", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-esp/main/esp.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Thanosdagamer/silentaimscript/main/silentaim.lua"))()
 end)
 
 render:NewButton("esp", "easily see players", function()
     _G.FriendColor = Color3.fromRGB(0, 0, 255)
 	_G.EnemyColor = Color3.fromRGB(255, 0, 0)
 	_G.UseTeamColor = false
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/Thanosdagamer/silentaimscript/main/silentaim.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-esp/main/esp.lua"))()
 end)
 
 credits:NewLabel("me (thanosdagamer#6469)")
