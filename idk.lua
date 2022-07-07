@@ -13,9 +13,13 @@ local render = Window:NewTab("render")
 
 local credits = Window:NewTab("credits")
 
+local discord = Window:NewTab("discord")
+
 local movementsection = movement:NewSection("movement")
 
 local combatsection = combat:NewSection("combat")
+
+local discordSection = discord:NewSection("discord")
 
 local rendersection = render:NewSection("render")
 
@@ -49,4 +53,8 @@ end)
 creditssection:NewLabel("me (thanosdagamer#6469)")
 
 creditssection:NewLabel("someone i wont mention cuz they asked")
+
+discordSection:NewButton("copy discord invite", "copies discord invite link", function()
+    setclipboard("discord.gg/jv9UdWQatA")
+end)
 
