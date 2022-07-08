@@ -50,9 +50,9 @@ rendersection:NewButton("esp", "easily see players", function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-esp/main/esp.lua"))()
 end)
 
-creditssection:NewLabel("me (thanosdagamer#6469)")
+creditssection:NewLabel("me (thanosdagamer#6469) (dm for support)")
 
-creditssection:NewLabel("someone i wont mention cuz they asked")
+
 
 discordSection:NewButton("copy discord invite", "copies discord invite link", function()
     setclipboard("discord.gg/jv9UdWQatA")
