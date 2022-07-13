@@ -15,6 +15,8 @@ local credits = Window:NewTab("credits")
 
 local discord = Window:NewTab("discord")
 
+local bedwars = Window:NewTab("bedwars")
+
 local movementsection = movement:NewSection("movement")
 
 local combatsection = combat:NewSection("combat")
@@ -24,6 +26,8 @@ local discordSection = discord:NewSection("discord")
 local rendersection = render:NewSection("render")
 
 local creditssection = credits:NewSection("credits")
+
+local betabedwars = bedwars:NewSection("i am currently working on it, i hope its op tho lol")
 
 movementsection:NewSlider("speed", "changes speed", 100, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
