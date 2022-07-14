@@ -2,7 +2,7 @@
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
-local Window = Library.CreateLib("thanos hub v2.4", "Ocean")
+local Window = Library.CreateLib("thanos hub v2.6", "Ocean")
 
 
 local movement = Window:NewTab("movement")
