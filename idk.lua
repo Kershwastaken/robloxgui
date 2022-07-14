@@ -62,3 +62,6 @@ discordSection:NewButton("copy discord invite", "copies discord invite link", fu
     setclipboard("discord.gg/jv9UdWQatA")
 end)
 
+rendersection:NewButton("invisible", "hide and seek god mode lmao", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Thanosdagamer/ffwefwefwefwefwf/main/fwefwefwefwe"))()
+end)
