@@ -85,6 +85,7 @@ while wait(0.5) do
 end
 end)
 
-renderSection:NewButton("tracers", "draw lines to all players", function()
+rendersection:NewButton("tracers", "draw lines to all players", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Tracers-Script/main/Tracers.lua"))()
 end)
+
