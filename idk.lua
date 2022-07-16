@@ -1,17 +1,11 @@
-local whitelisted = loadstring(game:HttpGet("https://raw.githubusercontent.com/Thanosdagamer/privatewhitelists/main/whitelists.lua", true))()
-local HWID = game:GetService("RbxAnalyticsService"):GetClientId()
 
-for i,v in pairs(whitelisted) do
-    
-    if v == HWID then
-        
 
 
 --thanks to robloxscripts.com for having a lot of the coding i need
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
-local Window = Library.CreateLib("thanos hub v3 PRIVATE", "GrapeTheme")
+local Window = Library.CreateLib("thanos hub v3 ", "GrapeTheme")
 
 
 local movement = Window:NewTab("movement")
@@ -102,6 +96,4 @@ end)
 
 
 
-end
 
-end
