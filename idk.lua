@@ -2,7 +2,7 @@
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
-local Window = Library.CreateLib("thanos hub v2.6", "Ocean")
+local Window = Library.CreateLib("thanos hub v3", "GrapeTheme")
 
 
 local movement = Window:NewTab("movement")
@@ -15,7 +15,9 @@ local credits = Window:NewTab("credits")
 
 local discord = Window:NewTab("discord")
 
-local bedwars = Window:NewTab("bedwars")
+local other = Window:NewTab("other")
+
+local otherSection = other:NewSection("other")
 
 local movementsection = movement:NewSection("movement")
 
@@ -27,7 +29,6 @@ local rendersection = render:NewSection("render")
 
 local creditssection = credits:NewSection("credits")
 
-local betabedwars = bedwars:NewSection("i am currently working on it, i hope its op tho lol")
 
 movementsection:NewSlider("speed", "changes speed", 100, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
@@ -62,6 +63,28 @@ discordSection:NewButton("copy discord invite", "copies discord invite link", fu
     setclipboard("discord.gg/jv9UdWQatA")
 end)
 
-rendersection:NewButton("invisible", "hide and seek god mode lmao", function()
+rendersection:NewButton("invisible", "hide and seek god mode XD", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Thanosdagamer/ffwefwefwefwefwf/main/fwefwefwefwe"))()
+end)
+
+otherSection:NewButton("godmode (BETA)", "godmode, but it highly in beta rn", function()
+    local LocalPlayer = game:GetService("Players").LocalPlayer
+
+local function Invincibility()
+    if LocalPlayer.Character then
+        for i, v in pairs(LocalPlayer.Character:GetChildren()) do
+            if v.Name == "hitbox" then
+                v:Destroy()
+            end
+        end
+    end
+end
+
+while wait(0.5) do
+    Invincibility(LocalPlayer)
+end
+end)
+
+renderSection:NewButton("tracers", "draw lines to all players", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Tracers-Script/main/Tracers.lua"))()
 end)
