@@ -1,8 +1,17 @@
+local whitelisted = loadstring(game:HttpGet("https://raw.githubusercontent.com/Thanosdagamer/privatewhitelists/main/whitelists.lua", true))()
+local HWID = game:GetService("RbxAnalyticsService"):GetClientId()
+
+for i,v in pairs(whitelisted) do
+    
+    if v == HWID then
+        
+
+
 --thanks to robloxscripts.com for having a lot of the coding i need
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
-local Window = Library.CreateLib("thanos hub v3", "GrapeTheme")
+local Window = Library.CreateLib("thanos hub v3 PRIVATE", "GrapeTheme")
 
 
 local movement = Window:NewTab("movement")
@@ -17,8 +26,6 @@ local discord = Window:NewTab("discord")
 
 local other = Window:NewTab("other")
 
-local otherSection = other:NewSection("other")
-
 local movementsection = movement:NewSection("movement")
 
 local combatsection = combat:NewSection("combat")
@@ -28,6 +35,8 @@ local discordSection = discord:NewSection("discord")
 local rendersection = render:NewSection("render")
 
 local creditssection = credits:NewSection("credits")
+
+local otherSection = other:NewSection("other")
 
 
 movementsection:NewSlider("speed", "changes speed", 100, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
@@ -63,13 +72,11 @@ discordSection:NewButton("copy discord invite", "copies discord invite link", fu
     setclipboard("discord.gg/jv9UdWQatA")
 end)
 
-rendersection:NewButton("invisible", "hide and seek god mode XD", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Thanosdagamer/ffwefwefwefwefwf/main/fwefwefwefwe"))()
-end)
 
-otherSection:NewButton("godmode (BETA)", "godmode, but it highly in beta rn", function()
+
+otherSection:NewButton("godmode (BETA)", "sets u in god mode, but im not sure if works 100%", function()
     local LocalPlayer = game:GetService("Players").LocalPlayer
-
+ 
 local function Invincibility()
     if LocalPlayer.Character then
         for i, v in pairs(LocalPlayer.Character:GetChildren()) do
@@ -79,7 +86,7 @@ local function Invincibility()
         end
     end
 end
-
+ 
 while wait(0.5) do
     Invincibility(LocalPlayer)
 end
@@ -89,3 +96,12 @@ rendersection:NewButton("tracers", "draw lines to all players", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Tracers-Script/main/Tracers.lua"))()
 end)
 
+rendersection:NewButton("invisible", "hide and seek god mode XD", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Thanosdagamer/ffwefwefwefwefwf/main/fwefwefwefwe"))()
+end)
+
+
+
+end
+
+end
