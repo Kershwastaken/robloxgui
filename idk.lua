@@ -67,7 +67,7 @@ rendersection:NewButton("esp", "easily see players", function()
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-esp/main/esp.lua"))()
 end)
 
-creditssection:NewLabel("me (thanosdagamer#6469) (dm for support)")
+creditssection:NewLabel("me (Kersh#6469) (dm for support)")
 
 
 
