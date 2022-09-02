@@ -734,7 +734,7 @@ repeat
 
         humanoid.WalkSpeed = 72
 
-        wait(0.10)
+        wait(0.20)
         humanoid.WalkSpeed = 20
 
         wait(0.35)
