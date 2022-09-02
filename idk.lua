@@ -717,20 +717,19 @@ combatbla:Toggle("killaura", function(bool)
 
 end)
 
-repeat
+while wait() do
     if _G.settings.killaura then
         task.wait(0.1)
+
         local lplr = game.Players.LocalPlayer
         local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
         local e = KnitClient.Controllers.SwordController
         e:swingSwordAtMouse()
     end
-until _G.settings.killaura == false
+end
 
-repeat
+while wait() do
     if _G.settings.heatseeker then
-
-        task.wait(0.5)
 
         humanoid.WalkSpeed = 72
 
@@ -740,7 +739,7 @@ repeat
         wait(0.35)
     end
 
-until _G.settings.heatseeker == false
+end
 
 local choosePlayer = false -- set true if you want to insult one person only
 local chosenPlayer = "" -- if chosePlayer = true, type playername in quotes
@@ -772,28 +771,27 @@ local function Insult()
 end
 
 local randTime = math.random(5, 15)
-if _G.settings.autotoxic then
-
-    repeat
-
-        task.wait(5)
-
-        Insult()
-    until _G.settings.autotoxic == false
-
-end
 
 repeat
-    if _G.settings.nofall then
+    task.wait(5)
+    if _G.settings.autotoxic then
 
-        task.wait(0.1)
+        if _G.settings.autotoxic then
+
+            Insult()
+        end
+    end
+until _G.settings.autotoxic == false
+
+while wait() do
+
+    if _G.settings.nofall then
 
         game:GetService("ReplicatedStorage")["rbxts_include"]["node_modules"].net.out["_NetManaged"].GroundHit:FireServer()
     end
+end
 
-until _G.settings.nofall == false
-
-repeat
+while wait() do
     if _G.settings.spam == true then
 
         task.wait(0.5)
@@ -806,21 +804,20 @@ repeat
 
         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
     end
-until _G.settings.spam == false or nil
+end
 
-repeat
-    task.wait(0.5)
+while wait() do
     if _G.settings.sprint then
 
-        local thingthatmakesusprint = require(
-                                          game.Players.LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController
+        local thingthatmakesusprrint = require(
+                                           game.Players.LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController
         if thingthatmakesusprint.sprinting then
         else
             thingthatmakesusprint:startSprinting()
 
         end
     end
-until _G.settings.sprint == false
+end
 
 --  b:Label("Pretty Useless NGL",{
 --     TextSize = 25; -- Self Explaining
