@@ -1,130 +1,105 @@
+if (isfile) then
+else
+    game.Players.LocalPlayer:Kick(
+        "sorry, but due to your exploit you cant use kersh hub, i reccomend either krnl or synapse x.")
+end
+if isfile("kershhubsettings.txt") then
+    local HttpService = game:GetService("HttpService")
 
+    _G.settings = HttpService:JSONDecode(readfile("kershhubsettings.txt"))
+else
 
+    _G.settings = {
 
+        autotoxic = false,
+        heatseeker = false,
 
---thanks to robloxscripts.com for having a lot of the coding i need
+        autobuy = false,
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+        nofall = false,
+        spam = false,
+        spamdiscord = false,
+        sprint = false,
+        killaura = false
 
-local Window = Library.CreateLib("thanos hub v4", "GrapeTheme")
+    }
+end
 
+local filename = ("kershhubsettings.txt")
 
-local movement = Window:NewTab("movement")
+local function savesettings()
 
-local combat = Window:NewTab("combat")
+    local json
+    local HttpService = game:GetService("HttpService")
 
-local render = Window:NewTab("render")
+    if (writefile) then
+        json = HttpService:JSONEncode(_G.settings)
+        writefile(filename, json)
 
-local credits = Window:NewTab("credits")
+    else
+        game.Players.LocalPlayer:Kick(
+            "sorry, but due to your exploit you cant use kersh hub, i reccomend either krnl or synapse x.")
 
-local discord = Window:NewTab("discord")
-
-local other = Window:NewTab("other")
-
-local utility = Window:NewTab("utility")
-
-local otherSection = other:NewSection("other")
-
-local movementsection = movement:NewSection("movement")
-
-local combatsection = combat:NewSection("combat")
-
-local discordSection = discord:NewSection("discord")
-
-local rendersection = render:NewSection("render")
-
-local creditssection = credits:NewSection("credits")
-
-local utilitySection = utility:NewSection("utility")
-
-
-
-
-
-
-movementsection:NewSlider("speed", "changes speed", 100, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
-end)
-
-movementsection:NewSlider("gravity", "change ur gravity",500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
-    game:GetService("Workspace").Gravity = s
-end)
-
-combatsection:NewButton("aimbot", "rightclick to lock screen on people who arent on team", function()
-    G.AimbotInput = "RightClick"
-        _G.AimbotEasing = 0.000000000000001
-        _G.TeamCheck = true
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-aimbot/main/script.lua"))()
-end)
-combatsection:NewButton("silent aim", "auto aim no screen lock", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Thanosdagamer/silentaimscript/main/silentaim.lua"))()
-end)
-
-rendersection:NewButton("esp", "easily see players", function()
-    _G.FriendColor = Color3.fromRGB(0, 0, 255)
-	_G.EnemyColor = Color3.fromRGB(255, 0, 0)
-	_G.UseTeamColor = false
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-esp/main/esp.lua"))()
-end)
-
-creditssection:NewLabel("me (Kersh#6469) (dm for support)")
-
-
-
-discordSection:NewButton("copy discord invite", "copies discord invite link", function()
-    setclipboard("discord.gg/jv9UdWQatA")
-end)
-
-rendersection:NewButton("invisible", "hide and seek god mode XD", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Thanosdagamer/ffwefwefwefwefwf/main/fwefwefwefwe"))()
-end)
-
-otherSection:NewButton("godmode (BETA)", "godmode, but it highly in beta rn", function()
-    local LocalPlayer = game:GetService("Players").LocalPlayer
-
-local function Invincibility()
-    if LocalPlayer.Character then
-        for i, v in pairs(LocalPlayer.Character:GetChildren()) do
-            if v.Name == "hitbox" then
-                v:Destroy()
-            end
-        end
     end
+
 end
 
-while wait(0.5) do
-    Invincibility(LocalPlayer)
-end
+local users = game.Players:GetChildren()
+
+local player = game.Players.LocalPlayer
+
+local humanoid = player.Character.Humanoid
+
+local library =
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/Thanosdagamer/backuplibs/main/wallyv3.lua')))()
+
+local combat = library:CreateWindow("combat") -- Creates the window
+
+local blatant = library:CreateWindow("blatant") -- Creates the window
+
+local render = library:CreateWindow("render") -- Creates the window
+
+local utility = library:CreateWindow("utility") -- Creates the window
+
+local world = library:CreateWindow("world") -- Createsrthe window
+
+local aimstuff = combat:CreateFolder("aim stuff") -- Creates the folder(U will put here your buttons,etc)
+
+local movement = combat:CreateFolder("movement") -- Creates the folder(U will put here your buttons,etc)
+
+local unblatant = utility:CreateFolder("unblatant") -- Creates the folder(U will put here your buttons,etc)
+
+local movementbla = blatant:CreateFolder("movement") -- Creates the folder(U will put here your buttons,etc)
+
+local players = render:CreateFolder("players") -- Creates the folder(U will put here your buttons,etc)
+
+local chat = utility:CreateFolder("chat") -- Creates the folder(U will put here your buttons,etc)
+
+local Useless = utility:CreateFolder("useless") -- Creates the folder(U will put here your buttons,etc)
+
+local combatbla = blatant:CreateFolder("combat") -- Creates the folder(U will put here your buttons,etc)
+
+movement:Toggle("sprint", function(bool)
+
+    _G.settings.sprint = bool
+    savesettings()
+    repeat
+        task.wait(0.5)
+        local thingthatmakesusprint = require(
+                                          game.Players.LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController
+        if thingthatmakesusprint.sprinting then
+        else
+            thingthatmakesusprint:startSprinting()
+        end
+    until _G.settings.sprint == false
+    if _G.settings.sprint == false then
+        thingthatmakesusprint:stopSprinting()
+    end
 end)
 
-rendersection:NewButton("tracers", "draw lines to all players", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Tracers-Script/main/Tracers.lua"))()
-end)
-
-
-
-
-
-
-
-
-
-combatsection:NewButton("sprint", "sprints, but be careful you cant turn it off.", function()
-    
-    while wait() do
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 20
-end
-end)
-
-
-utilitySection:NewButton("buy wool", "buys wool, but you must be near shop", function()
-    
-
-
-
-
+unblatant:Button("buy wool", function()
     -- Script generated by SimpleSpy - credits to exx#9394
-    
+
     local args = {
         [1] = {
             ["shopItem"] = {
@@ -136,245 +111,756 @@ utilitySection:NewButton("buy wool", "buys wool, but you must be near shop", fun
             }
         }
     }
-    
-    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(unpack(args))
-    
-    
+
+    game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+        unpack(args))
 end)
 
+movementbla:Slider("speed", {
+    min = 16, -- min value of the slider
+    max = 54, -- max value of the slider
+    precise = true -- max 2 decimals
+}, function(value)
+
+    while wait() do
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+
+    end
+end)
+
+movementbla:Slider("gravity", {
+    min = 0, -- min value of the slider
+    max = 500, -- max value of the slider
+    precise = true -- max 2 decimals
+}, function(value)
+
+    while wait() do
+        game:GetService("Workspace").Gravity = value
+
+    end
+end)
+
+players:Button("ESP", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Thanosdagamer/thanoshubsource/main/ESP", true))()
+end)
+
+movementbla:Button("dinoexploit", function()
+
+    game:GetService("ReplicatedStorage"):FindFirstChild(
+        "events-@easy-games/game-core:shared/game-core-networking@getEvents.Events").useAbility:FireServer("dino_charge")
+    task.spawn(function()
+        if GuiLibrary["MainGui"]:FindFirstChild("bar") then
+            return
+        end
+        if lplr.Character then
+            lplr.Character:SetAttribute("SpeedBoost", 3)
+            local allowed = true
+            dinoconnection = bedwars["ClientHandler"]:Get(bedwars["DinoRemote"]):Connect(function()
+                if lplr.Character then
+                    lplr.Character:SetAttribute("SpeedBoost", nil)
+                end
+                allowed = false
+                dinoconnection:Disconnect()
+            end)
+            task.delay(10, function()
+                if lplr.Character and allowed then
+                    lplr.Character:SetAttribute("SpeedBoost", nil)
+                end
+                if dinoconnection then
+                    dinoconnection:Disconnect()
+                end
+            end)
+        end
+        local bar = Instance.new("Frame")
+        bar.Size = UDim2.new(0.3, 0, 0, 10)
+        bar.AnchorPoint = Vector2.new(0.5, 0.5)
+        bar.BorderSizePixel = 0
+        bar.BackgroundTransparency = 0.5
+        bar.BackgroundColor3 = Color3.new()
+        bar.Position = UDim2.new(0.5, 0, 0.75, 0)
+        bar.Name = "bar"
+        bar.Parent = GuiLibrary["MainGui"]
+        local bar2 = bar:Clone()
+        bar2.Size = UDim2.new(1, 0, 1, 0)
+        bar2.AnchorPoint = Vector2.new(0, 0)
+        bar2.Position = UDim2.new(0, 0, 0, 0)
+        bar2.BackgroundTransparency = 0
+        bar2.BackgroundColor3 = Color3.new(1, 1, 1)
+        bar2.Parent = bar
+        bar2:TweenSize(UDim2.new(0, 0, 1, 0), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 60)
+        task.wait(60)
+        bar:Destroy()
+    end)
+    DinoExploit["ToggleButton"](false)
+
+end)
+
+chat:Toggle("chat spammer", function(bool)
+    if _G.settings == true then
+        _G.settings.spam = false
+    else
+        _G.settings.spam = bool
+
+        savesettings()
+
+        repeat
+
+            task.wait(0.5)
+            -- Script generated by SimpleSpy - credits to exx#9394
+
+            local args = {
+                [1] = "kersh hub on top",
+                [2] = "All"
+            }
+
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+
+        until _G.settings.spam == false
+    end
 
+end)
 
+movementbla:Toggle("antifalldamage", function(bool)
 
+    _G.settings.nofall = bool
 
+    savesettings()
 
+    repeat
 
+        task.wait(0.0000000000000000000000000000000001)
 
+        game:GetService("ReplicatedStorage")["rbxts_include"]["node_modules"].net.out["_NetManaged"].GroundHit:FireServer()
 
+    until _G.settings.nofall == false
 
+end)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+chat:Toggle("spam discord mode", function(bool)
+
+    _G.settings.spamdiscord = bool
+
+    savesettings()
+
+    repeat
+
+        task.wait(0.5)
+
+        local args = {
+            [1] = "join .gg/jv9UdWQatA for this pro script 😎",
+            [2] = "All"
+        }
+
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+
+    until _G.settings.spamdiscord == false
+end)
+
+Useless:Button("crash ur game", function()
+    for i = 1, 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000, 1 do
+        print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+
+    end
+end)
+
+unblatant:Toggle("AutoBuy", function(bool)
+
+    _G.settings.autobuy = bool
+
+    savesettings()
+    local function autobuy()
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["shopItem"] = {
+                    ["disabledInQueue"] = {
+                        [1] = "tnt_wars"
+                    },
+                    ["currency"] = "emerald",
+                    ["itemType"] = "diamond_sword",
+                    ["amount"] = 1,
+                    ["price"] = 4,
+                    ["category"] = "Armory",
+                    ["ignoredByKit"] = {
+                        [1] = "barbarian",
+                        [2] = "dasher",
+                        [3] = "ember",
+                        [4] = "lumen"
+                    },
+                    ["lockAfterPurchase"] = true
+                }
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+            unpack(args))
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["shopItem"] = {
+                    ["disabledInQueue"] = {
+                        [1] = "tnt_wars"
+                    },
+                    ["currency"] = "emerald",
+                    ["itemType"] = "emerald_sword",
+                    ["amount"] = 1,
+                    ["price"] = 20,
+                    ["category"] = "Armory",
+                    ["ignoredByKit"] = {
+                        [1] = "barbarian",
+                        [2] = "ice_queen",
+                        [3] = "dasher",
+                        [4] = "ember",
+                        [5] = "lumen"
+                    },
+                    ["lockAfterPurchase"] = true
+                }
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+            unpack(args))
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["shopItem"] = {
+                    ["disabledInQueue"] = {
+                        [1] = "tnt_wars"
+                    },
+                    ["currency"] = "emerald",
+                    ["itemType"] = "diamond_sword",
+                    ["amount"] = 1,
+                    ["price"] = 4,
+                    ["category"] = "Armory",
+                    ["ignoredByKit"] = {
+                        [1] = "barbarian",
+                        [2] = "dasher",
+                        [3] = "ember",
+                        [4] = "lumen"
+                    },
+                    ["lockAfterPurchase"] = true
+                }
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+            unpack(args))
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["upgradeId"] = "armory",
+                ["tier"] = 0
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseTeamUpgrade:InvokeServer(
+            unpack(args))
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["shopItem"] = {
+                    ["lockAfterPurchase"] = true,
+                    ["itemType"] = "iron_axe",
+                    ["price"] = 30,
+                    ["prevTier"] = "stone_axe",
+                    ["nextTier"] = "diamond_axe",
+                    ["currency"] = "iron",
+                    ["disabledInQueue"] = {
+                        [1] = "tnt_wars"
+                    },
+                    ["amount"] = 1,
+                    ["tiered"] = true,
+                    ["ignoredByKit"] = {
+                        [1] = "miner"
+                    },
+                    ["spawnWithItems"] = {
+                        [1] = "iron_axe"
+                    },
+                    ["category"] = "Tools"
+                }
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+            unpack(args))
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["shopItem"] = {
+                    ["lockAfterPurchase"] = true,
+                    ["itemType"] = "stone_axe",
+                    ["price"] = 20,
+                    ["prevTier"] = "wood_axe",
+                    ["nextTier"] = "iron_axe",
+                    ["currency"] = "iron",
+                    ["disabledInQueue"] = {
+                        [1] = "tnt_wars"
+                    },
+                    ["amount"] = 1,
+                    ["tiered"] = true,
+                    ["ignoredByKit"] = {
+                        [1] = "miner"
+                    },
+                    ["spawnWithItems"] = {
+                        [1] = "stone_axe"
+                    },
+                    ["category"] = "Tools"
+                }
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+            unpack(args))
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["shopItem"] = {
+                    ["lockAfterPurchase"] = true,
+                    ["itemType"] = "wood_axe",
+                    ["price"] = 20,
+                    ["nextTier"] = "stone_axe",
+                    ["currency"] = "iron",
+                    ["amount"] = 1,
+                    ["disabledInQueue"] = {
+                        [1] = "tnt_wars"
+                    },
+                    ["ignoredByKit"] = {
+                        [1] = "miner"
+                    },
+                    ["spawnWithItems"] = {
+                        [1] = "wood_axe"
+                    },
+                    ["category"] = "Tools"
+                }
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+            unpack(args))
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["shopItem"] = {
+                    ["currency"] = "iron",
+                    ["itemType"] = "wood_bow",
+                    ["amount"] = 1,
+                    ["price"] = 40,
+                    ["category"] = "Combat",
+                    ["spawnWithItems"] = {
+                        [1] = "wood_bow"
+                    },
+                    ["lockAfterPurchase"] = true
+                }
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+            unpack(args))
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["shopItem"] = {
+                    ["lockAfterPurchase"] = true,
+                    ["itemType"] = "emerald_chestplate",
+                    ["price"] = 40,
+                    ["prevTier"] = "diamond_chestplate",
+                    ["customDisplayName"] = "Emerald Armor",
+                    ["currency"] = "emerald",
+                    ["amount"] = 1,
+                    ["tiered"] = true,
+                    ["spawnWithItems"] = {
+                        [1] = "emerald_helmet",
+                        [2] = "emerald_chestplate",
+                        [3] = "emerald_boots"
+                    },
+                    ["category"] = "Combat"
+                }
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+            unpack(args))
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["shopItem"] = {
+                    ["lockAfterPurchase"] = true,
+                    ["itemType"] = "diamond_chestplate",
+                    ["price"] = 8,
+                    ["prevTier"] = "iron_chestplate",
+                    ["customDisplayName"] = "Diamond Armor",
+                    ["currency"] = "emerald",
+                    ["amount"] = 1,
+                    ["tiered"] = true,
+                    ["category"] = "Combat",
+                    ["spawnWithItems"] = {
+                        [1] = "diamond_helmet",
+                        [2] = "diamond_chestplate",
+                        [3] = "diamond_boots"
+                    },
+                    ["nextTier"] = "emerald_chestplate"
+                }
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+            unpack(args))
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["shopItem"] = {
+                    ["lockAfterPurchase"] = true,
+                    ["itemType"] = "iron_chestplate",
+                    ["price"] = 120,
+                    ["prevTier"] = "leather_chestplate",
+                    ["customDisplayName"] = "Iron Armor",
+                    ["currency"] = "iron",
+                    ["amount"] = 1,
+                    ["tiered"] = true,
+                    ["category"] = "Combat",
+                    ["spawnWithItems"] = {
+                        [1] = "iron_helmet",
+                        [2] = "iron_chestplate",
+                        [3] = "iron_boots"
+                    },
+                    ["nextTier"] = "diamond_chestplate"
+                }
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+            unpack(args))
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["shopItem"] = {
+                    ["lockAfterPurchase"] = true,
+                    ["itemType"] = "iron_chestplate",
+                    ["price"] = 120,
+                    ["prevTier"] = "leather_chestplate",
+                    ["customDisplayName"] = "Iron Armor",
+                    ["currency"] = "iron",
+                    ["amount"] = 1,
+                    ["tiered"] = true,
+                    ["category"] = "Combat",
+                    ["spawnWithItems"] = {
+                        [1] = "iron_helmet",
+                        [2] = "iron_chestplate",
+                        [3] = "iron_boots"
+                    },
+                    ["nextTier"] = "diamond_chestplate"
+                }
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+            unpack(args))
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["shopItem"] = {
+                    ["disabledInQueue"] = {
+                        [1] = "tnt_wars"
+                    },
+                    ["currency"] = "iron",
+                    ["itemType"] = "iron_sword",
+                    ["amount"] = 1,
+                    ["price"] = 70,
+                    ["category"] = "Combat",
+                    ["ignoredByKit"] = {
+                        [1] = "barbarian",
+                        [2] = "dasher"
+                    },
+                    ["lockAfterPurchase"] = true
+                }
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+            unpack(args))
+
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = {
+                ["shopItem"] = {
+                    ["disabledInQueue"] = {
+                        [1] = "tnt_wars"
+                    },
+                    ["currency"] = "iron",
+                    ["itemType"] = "stone_sword",
+                    ["amount"] = 1,
+                    ["price"] = 20,
+                    ["category"] = "Combat",
+                    ["ignoredByKit"] = {
+                        [1] = "barbarian",
+                        [2] = "dasher"
+                    },
+                    ["lockAfterPurchase"] = true
+                }
+            }
+        }
+
+        game:GetService("ReplicatedStorage").rbxts_include.node_modules.net.out._NetManaged.BedwarsPurchaseItem:InvokeServer(
+            unpack(args))
+
+    end
+    repeat
+        autobuy()
+    until _G.settings.autobuy == false
+end)
+
+chat:Toggle("auto toxic", function(bool)
+    _G.settings.autotoxic = bool
+
+    savesettings()
+
+    local choosePlayer = false -- set true if you want to insult one person only
+    local chosenPlayer = "" -- if chosePlayer = true, type playername in quotes
+
+    local Taunts = { -- add as many as you wish
+    "Imagine Not Being Able To Exploit. Get kersh hub and synapse x", "if you dont exploits your trash",
+    "GET KERSH HUB", "Get Lost Loser. get kersh hub if pog", "Imagine Being So Bad, Couldn't be me",
+    "Go cry about it like fr even your dad left u because you cry", "i am best", "i am extremely good", "DAMN IM GOOD",
+    "Cope harder", "ig im god", "Imagine not having synapse With kersh hub, couldn't be me", "L + Bozo + Idiot",
+    "no hersh hub? no life.", "your dad left for the kersh hub."}
+
+    local Remote = game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest
+
+    local function Insult()
+        local players = game.Players:GetChildren()
+        local howManyPlayers = #players
+
+        local ran = math.random(1, howManyPlayers)
+        local chosenOne = players[ran]
+        local chance = math.random(1, 20)
+
+        if choosePlayer == true then
+            Remote:FireServer(chosenPlayer .. " " .. Taunts[math.random(1, #Taunts)], "All")
+        elseif chance <= 5 then
+            Remote:FireServer(chosenOne.Name .. " " .. Taunts[math.random(1, #Taunts)], "All")
+        else
+            Remote:FireServer(Taunts[math.random(1, #Taunts)], "All")
+        end
+    end
+
+    local randTime = math.random(5, 15)
+
+    repeat
+
+        task.wait(5)
+
+        Insult()
+    until _G.settings.autotoxic == false
+
+end)
+
+movementbla:Toggle("heatseeker speed", function(bool)
+
+    _G.settings.heatseeker = bool
+
+    savesettings()
+    repeat
+        task.wait(0.5)
+
+        humanoid.WalkSpeed = 72
+
+        wait(0.10)
+        humanoid.WalkSpeed = 20
+
+        wait(0.35)
+
+    until _G.settings.heatseeker == false
+
+    if _G.settings.heatseeker == false then
+        humanoid.WalkSpeed = 20
+    end
+
+end)
+
+combatbla:Toggle("killaura", function(bool)
+    _G.settings.killaura = bool
+    savesettings()
+    repeat
+        task.wait(0.1)
+        local lplr = game.Players.LocalPlayer
+        local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
+        local e = KnitClient.Controllers.SwordController
+        e:swingSwordAtMouse()
+    until _G.settings.killaura == false
+
+end)
+
+repeat
+    if _G.settings.killaura then
+        task.wait(0.1)
+        local lplr = game.Players.LocalPlayer
+        local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
+        local e = KnitClient.Controllers.SwordController
+        e:swingSwordAtMouse()
+    end
+until _G.settings.killaura == false
+
+repeat
+    if _G.settings.heatseeker then
+
+        task.wait(0.5)
+
+        humanoid.WalkSpeed = 72
+
+        wait(0.10)
+        humanoid.WalkSpeed = 20
+
+        wait(0.35)
+    end
+
+until _G.settings.heatseeker == false
+
+local choosePlayer = false -- set true if you want to insult one person only
+local chosenPlayer = "" -- if chosePlayer = true, type playername in quotes
+
+local Taunts = { -- add as many as you wish
+"Imagine Not Being Able To Exploit. Get kersh hub and synapse x", "if you dont exploits your trash", "GET KERSH HUB",
+"Get Lost Loser. get kersh hub if pog", "Imagine Being So Bad, Couldn't be me",
+"Go cry about it like fr even your dad left u because you cry", "i am best", "i am extremely good", "DAMN IM GOOD",
+"Cope harder", "ig im god", "Imagine not having synapse With kersh hub, couldn't be me", "L + Bozo + Idiot",
+"no hersh hub? no life.", "your dad left for the kersh hub."}
+
+local Remote = game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest
+
+local function Insult()
+    local players = game.Players:GetChildren()
+    local howManyPlayers = #players
+
+    local ran = math.random(1, howManyPlayers)
+    local chosenOne = players[ran]
+    local chance = math.random(1, 20)
+
+    if choosePlayer == true then
+        Remote:FireServer(chosenPlayer .. " " .. Taunts[math.random(1, #Taunts)], "All")
+    elseif chance <= 5 then
+        Remote:FireServer(chosenOne.Name .. " " .. Taunts[math.random(1, #Taunts)], "All")
+    else
+        Remote:FireServer(Taunts[math.random(1, #Taunts)], "All")
+    end
+end
+
+local randTime = math.random(5, 15)
+if _G.settings.autotoxic then
+
+    repeat
+
+        task.wait(5)
+
+        Insult()
+    until _G.settings.autotoxic == false
+
+end
+
+repeat
+    if _G.settings.nofall then
+
+        task.wait(0.1)
+
+        game:GetService("ReplicatedStorage")["rbxts_include"]["node_modules"].net.out["_NetManaged"].GroundHit:FireServer()
+    end
+
+until _G.settings.nofall == false
+
+repeat
+    if _G.settings.spam == true then
+
+        task.wait(0.5)
+        -- Script generated by SimpleSpy - credits to exx#9394
+
+        local args = {
+            [1] = "kersh hub on top",
+            [2] = "All"
+        }
+
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+    end
+until _G.settings.spam == false or nil
+
+repeat
+    task.wait(0.5)
+    if _G.settings.sprint then
+
+        local thingthatmakesusprint = require(
+                                          game.Players.LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController
+        if thingthatmakesusprint.sprinting then
+        else
+            thingthatmakesusprint:startSprinting()
+
+        end
+    end
+until _G.settings.sprint == false
+
+--  b:Label("Pretty Useless NGL",{
+--     TextSize = 25; -- Self Explaining
+--     TextColor = Color3.fromRGB(255,255,255); -- Self Explaining
+--      BgColor = Color3.fromRGB(69,69,69); -- Self Explaining
+
+--  }) 
+
+--  b:Button("aimbbot",function()
+--     G.AimbotInput = "RightClick"
+--     _G.AimbotEasing = 0.000000000000001
+--     _G.TeamCheck = true
+--     loadstring(game:HttpGet("https://raw.githubusercontent.com/zeroisswag/universal-aimbot/main/script.lua"))()
+--  end)
+
+--  b:Toggle("Toggle",function(bool)
+--     shared.toggle = bool
+--     print(shared.toggle)
+--  end)
+--  b:Slider("Slider",{
+--     min = 10; -- min value of the slider
+--     max = 50; -- max value of the slider
+--      precise = true; -- max 2 decimals
+--  },function(value)
+--      print(value)
+--  end)
+
+--  b:Dropdown("Dropdown",{"A","B","C"},true,function(mob) --true/false, replaces the current title "Dropdown" with the option that t
+--      print(mob)
+--  end)
+
+--  b:Bind("Bind",Enum.KeyCode.C,function() --Default bind
+--      print("Yes")
+--  end)
+
+--  b:ColorPicker("ColorPicker",Color3.fromRGB(255,0,0),function(color) --Default color
+--      print(color)
+--  end)
+
+--  b:Box("Box","number",function(value) -- "number" or "string"
+--      print(value)
+--  end)
 
