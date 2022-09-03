@@ -708,23 +708,44 @@ combatbla:Toggle("killaura", function(bool)
     _G.settings.killaura = bool
     savesettings()
     repeat
-        task.wait(0.1)
-        local lplr = game.Players.LocalPlayer
-        local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
-        local e = KnitClient.Controllers.SwordController
-        e:swingSwordAtMouse()
+        task.wait()
+        if _G.settings.killaura then
+            for _, v in pairs(users) do
+                if v == player then
+                    break
+                end
+
+                local mag = (player.Character.HumanoidRootPart.CFrame - v.Character.HumanoidRootPart.CFrame).magnitude
+                if mag < 0.1 then
+
+                    local lplr = game.Players.LocalPlayer
+                    local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
+                    local e = KnitClient.Controllers.SwordController
+                    e:swingSwordAtMouse()
+                end
+            end
+        end
+
     until _G.settings.killaura == false
 
 end)
 
 while wait() do
     if _G.settings.killaura then
-        task.wait(0.1)
+        for _, v in pairs(users) do
+            if v == player then
+                break
+            end
 
-        local lplr = game.Players.LocalPlayer
-        local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
-        local e = KnitClient.Controllers.SwordController
-        e:swingSwordAtMouse()
+            local mag = (player.Character.HumanoidRootPart.CFrame - v.Character.HumanoidRootPart.CFrame).magnitude
+            if mag < 0.1 then
+
+                local lplr = game.Players.LocalPlayer
+                local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
+                local e = KnitClient.Controllers.SwordController
+                e:swingSwordAtMouse()
+            end
+        end
     end
 end
 
