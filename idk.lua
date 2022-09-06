@@ -20,7 +20,8 @@ else
         spam = false,
         spamdiscord = false,
         sprint = false,
-        killaura = false
+        killaura = false,
+        antikb = false
 
     }
 end
@@ -710,42 +711,62 @@ combatbla:Toggle("killaura", function(bool)
     repeat
         task.wait()
         if _G.settings.killaura then
-            for _, v in pairs(users) do
-                if v == player then
-                    break
-                end
-
-                local mag = (player.Character.HumanoidRootPart.CFrame - v.Character.HumanoidRootPart.CFrame).magnitude
-                if mag < 0.1 then
-
-                    local lplr = game.Players.LocalPlayer
-                    local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
-                    local e = KnitClient.Controllers.SwordController
-                    e:swingSwordAtMouse()
-                end
-            end
+            local lplr = game.Players.LocalPlayer
+            local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
+            local e = KnitClient.Controllers.SwordController
+            e:swingSwordAtMouse()
         end
 
     until _G.settings.killaura == false
 
 end)
 
+movementbla:Toggle("antiknockback", function(bool)
+    _G.settings.antikb = bool
+    repeat
+        task.wait()
+        local knockbacktable = debug.getupvalue(
+            require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
+                .calculateKnockbackVelocity, 1)
+        knockbacktable["kbDirectionStrength"] = 0
+        knockbacktable["kbUpwardStrength"] = 0
+    until _G.settings.antikb == false
+    if _G.settings.antikb == false then
+        local knockbacktable = debug.getupvalue(
+            require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
+                .calculateKnockbackVelocity, 1)
+        knockbacktable["kbDirectionStrength"] = 100
+        knockbacktable["kbUpwardStrength"] = 100
+    end
+end)
+
+if _G.settings.antikb then
+
+    repeat
+        task.wait()
+        local knockbacktable = debug.getupvalue(
+            require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
+                .calculateKnockbackVelocity, 1)
+        knockbacktable["kbDirectionStrength"] = 0
+        knockbacktable["kbUpwardStrength"] = 0
+    until _G.settings.antikb == false
+end
+
+if _G.settings.antikb == false then
+    local knockbacktable = debug.getupvalue(
+        require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
+            .calculateKnockbackVelocity, 1)
+    knockbacktable["kbDirectionStrength"] = 100
+    knockbacktable["kbUpwardStrength"] = 100
+end
+
 while wait() do
     if _G.settings.killaura then
-        for _, v in pairs(users) do
-            if v == player then
-                break
-            end
 
-            local mag = (player.Character.HumanoidRootPart.CFrame - v.Character.HumanoidRootPart.CFrame).magnitude
-            if mag < 0.1 then
-
-                local lplr = game.Players.LocalPlayer
-                local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
-                local e = KnitClient.Controllers.SwordController
-                e:swingSwordAtMouse()
-            end
-        end
+        local lplr = game.Players.LocalPlayer
+        local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
+        local e = KnitClient.Controllers.SwordController
+        e:swingSwordAtMouse()
     end
 end
 
