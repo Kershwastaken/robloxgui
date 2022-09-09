@@ -1,3 +1,15 @@
+HashVector = function(vec)
+    return {
+        value = vec
+    }
+end
+
+local lplr = game.Players.LocalPlayer
+
+local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
+
+local repstorage = game:GetService("ReplicatedStorage")
+
 if (isfile) then
 else
     game.Players.LocalPlayer:Kick(
@@ -768,9 +780,9 @@ while wait() do
         local e = KnitClient.Controllers.SwordController
         e:swingSwordAtMouse()
     end
-end
 
-while wait() do
+
+
     if _G.settings.heatseeker then
 
         humanoid.WalkSpeed = 72
@@ -781,7 +793,7 @@ while wait() do
         wait(0.35)
     end
 
-end
+
 
 local choosePlayer = false -- set true if you want to insult one person only
 local chosenPlayer = "" -- if chosePlayer = true, type playername in quotes
@@ -814,26 +826,26 @@ end
 
 local randTime = math.random(5, 15)
 
-repeat
+
     task.wait(5)
-    if _G.settings.autotoxic then
+    
 
         if _G.settings.autotoxic then
 
             Insult()
         end
-    end
-until _G.settings.autotoxic == false
+    
 
-while wait() do
+
+
 
     if _G.settings.nofall then
 
         game:GetService("ReplicatedStorage")["rbxts_include"]["node_modules"].net.out["_NetManaged"].GroundHit:FireServer()
     end
-end
 
-while wait() do
+
+
     if _G.settings.spam == true then
 
         task.wait(0.5)
@@ -846,13 +858,14 @@ while wait() do
 
         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
     end
-end
 
-while wait() do
+
+
     if _G.settings.sprint then
 
+
         local thingthatmakesusprrint = require(
-                                           game.Players.LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController
+                                game.Players.LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController
         if thingthatmakesusprint.sprinting then
         else
             thingthatmakesusprint:startSprinting()
@@ -860,6 +873,9 @@ while wait() do
         end
     end
 end
+
+
+
 
 --  b:Label("Pretty Useless NGL",{
 --     TextSize = 25; -- Self Explaining
