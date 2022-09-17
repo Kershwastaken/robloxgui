@@ -1,12 +1,6 @@
 local library =
     loadstring(game:HttpGet(('https://raw.githubusercontent.com/Thanosdagamer/backuplibs/main/wallyv3.lua')))()
 
-local HashVector = function(vec)
-    return {
-        value = vec
-    }
-end
-
 local lplr = game.Players.LocalPlayer
 
 local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
@@ -731,6 +725,7 @@ end)
 
 movementbla:Toggle("antiknockback", function(bool)
     _G.settings.antikb = bool
+
     repeat
         task.wait()
         local knockbacktable = debug.getupvalue(
@@ -739,6 +734,7 @@ movementbla:Toggle("antiknockback", function(bool)
         knockbacktable["kbDirectionStrength"] = 0
         knockbacktable["kbUpwardStrength"] = 0
     until _G.settings.antikb == false
+
     if _G.settings.antikb == false then
         local knockbacktable = debug.getupvalue(
             require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
@@ -746,6 +742,7 @@ movementbla:Toggle("antiknockback", function(bool)
         knockbacktable["kbDirectionStrength"] = 100
         knockbacktable["kbUpwardStrength"] = 100
     end
+
 end)
 
 combatbla:Toggle("reach", function(bool)
@@ -758,25 +755,20 @@ combatbla:Toggle("reach", function(bool)
     end
 end)
 
-if _G.settings.reach then
+while _G.settings.reach == true do
+    task.wait()
+    local swordthingy = require(repstorage.TS.combat["combat-constant"]).CombatConstant
+    swordthingy.RAYCAST_SWORD_CHARACTER_DISTANCE = 18
 
-    repeat
-        task.wait()
-        local swordthingy = require(repstorage.TS.combat["combat-constant"]).CombatConstant
-        swordthingy.RAYCAST_SWORD_CHARACTER_DISTANCE = 18
-    until _G.settings.reach == false
 end
 
-if _G.settings.antikb then
-
-    repeat
-        task.wait()
-        local knockbacktable = debug.getupvalue(
-            require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
-                .calculateKnockbackVelocity, 1)
-        knockbacktable["kbDirectionStrength"] = 0
-        knockbacktable["kbUpwardStrength"] = 0
-    until _G.settings.antikb == false
+while _G.settings.antikb == true do
+    task.wait()
+    local knockbacktable = debug.getupvalue(
+        require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
+            .calculateKnockbackVelocity, 1)
+    knockbacktable["kbDirectionStrength"] = 0
+    knockbacktable["kbUpwardStrength"] = 0
 end
 
 if _G.settings.antikb == false then
@@ -786,30 +778,27 @@ if _G.settings.antikb == false then
     knockbacktable["kbDirectionStrength"] = 100
     knockbacktable["kbUpwardStrength"] = 100
 end
-if _G.settings.killaura then
-    repeat
-        task.wait()
 
-        local lplr = game.Players.LocalPlayer
-        local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
-        local e = KnitClient.Controllers.SwordController
-        e:swingSwordAtMouse()
+while _G.settings.killaura == true do
+    wait()
 
-    until _G.settings.killaura == false
+    local lplr = game.Players.LocalPlayer
+    local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
+    local e = KnitClient.Controllers.SwordController
+    e:swingSwordAtMouse()
 
 end
 
-if _G.settings.heatseeker then
-    repeat
+while _G.settings.heatseeker == true do
+    wait(0.5)
 
-        humanoid.WalkSpeed = 72
+    humanoid.WalkSpeed = 72
 
-        wait(0.20)
-        humanoid.WalkSpeed = 20
+    wait(0.20)
+    humanoid.WalkSpeed = 20
 
-        wait(0.35)
+    wait(0.35)
 
-    until _G.settings.heatseeker == false
 end
 
 local choosePlayer = false -- set true if you want to insult one person only
@@ -843,25 +832,22 @@ end
 
 local randTime = math.random(5, 15)
 
-repeat
-    task.wait(randTime)
+task.wait(randTime)
 
-    if _G.settings.autotoxic then
+while _G.settings.autotoxic == true do
 
-        Insult()
-    end
+    wait()
+    insult()
 
-until _G.settings.autotoxic == false
-
-if _G.settings.nofall then
-    repeat
-        task.wait()
-
-        game:GetService("ReplicatedStorage")["rbxts_include"]["node_modules"].net.out["_NetManaged"].GroundHit:FireServer()
-    until _G.settings.nofall == false
 end
 
-if _G.settings.spam == true then
+while _G.settings.nofall == true do
+    wait()
+    game:GetService("ReplicatedStorage")["rbxts_include"]["node_modules"].net.out["_NetManaged"].GroundHit:FireServer()
+
+end
+
+if _G.settings.spammer then
     repeat
         task.wait(3)
 
@@ -874,21 +860,20 @@ if _G.settings.spam == true then
         }
 
         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
-    until _G.settings.spam == false
+    until _G.spammer == false
+
 end
 
-if _G.settings.sprint then
-    repeat
-        task.wait()
+while _G.settings.sprint == true do
+    wait()
+    local thingthatmakesusprrint = require(
+                                       game.Players.LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController
+    if thingthatmakesusprint.sprinting then
+    else
+        thingthatmakesusprint:startSprinting()
 
-        local thingthatmakesusprrint = require(
-                                           game.Players.LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController
-        if thingthatmakesusprint.sprinting then
-        else
-            thingthatmakesusprint:startSprinting()
+    end
 
-        end
-    until _G.settings.sprint == false
 end
 
 -- b:Label("Pretty Useless NGL",{
@@ -951,4 +936,8 @@ local yourvariable = b:Label("Pretty Useless NGL",{
 2)Refresh it using the function
 yourvariable:Refresh("Hello") It will only change the text ofc
 ]]
+
+for i, v in pairs(_G.settings) do
+    print(i, v)
+end
 
