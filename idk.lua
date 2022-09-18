@@ -83,7 +83,7 @@ local Useless = utility:CreateFolder("useless") -- Creates the folder(U will put
 local combatbla = blatant:CreateFolder("combat") -- Creates the folder(U will put here your buttons,etc)
 
 movement:Toggle("sprint", function(bool)
-
+wait()
     _G.settings.sprint = bool
     savesettings()
     repeat
@@ -98,6 +98,7 @@ movement:Toggle("sprint", function(bool)
     if _G.settings.sprint == false then
         thingthatmakesusprint:stopSprinting()
     end
+    wait()
 end)
 
 unblatant:Button("buy wool", function()
@@ -148,7 +149,7 @@ players:Button("ESP", function()
 end)
 
 movementbla:Button("dinoexploit", function()
-
+wait()
     game:GetService("ReplicatedStorage"):FindFirstChild(
         "events-@easy-games/game-core:shared/game-core-networking@getEvents.Events").useAbility:FireServer("dino_charge")
     task.spawn(function()
@@ -195,10 +196,11 @@ movementbla:Button("dinoexploit", function()
         bar:Destroy()
     end)
     DinoExploit["ToggleButton"](false)
-
+wait()
 end)
 
 chat:Toggle("chat spammer", function(bool)
+    wait()
     if _G.settings == true then
         _G.settings.spam = false
     else
@@ -220,11 +222,11 @@ chat:Toggle("chat spammer", function(bool)
 
         until _G.settings.spam == false
     end
-
+wait()
 end)
 
 movementbla:Toggle("antifalldamage", function(bool)
-
+wait()
     _G.settings.nofall = bool
 
     savesettings()
@@ -236,11 +238,11 @@ movementbla:Toggle("antifalldamage", function(bool)
         game:GetService("ReplicatedStorage")["rbxts_include"]["node_modules"].net.out["_NetManaged"].GroundHit:FireServer()
 
     until _G.settings.nofall == false
-
+wait()
 end)
 
 chat:Toggle("spam discord mode", function(bool)
-
+wait()
     _G.settings.spamdiscord = bool
 
     savesettings()
@@ -257,6 +259,7 @@ chat:Toggle("spam discord mode", function(bool)
         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
 
     until _G.settings.spamdiscord == false
+    wait()
 end)
 
 Useless:Button("crash ur game", function()
@@ -267,7 +270,7 @@ Useless:Button("crash ur game", function()
 end)
 
 unblatant:Toggle("AutoBuy", function(bool)
-
+wait()
     _G.settings.autobuy = bool
 
     savesettings()
@@ -637,9 +640,11 @@ unblatant:Toggle("AutoBuy", function(bool)
     repeat
         autobuy()
     until _G.settings.autobuy == false
+    wait()
 end)
 
 chat:Toggle("auto toxic", function(bool)
+    wait()
     _G.settings.autotoxic = bool
 
     savesettings()
@@ -681,11 +686,11 @@ chat:Toggle("auto toxic", function(bool)
 
         Insult()
     until _G.settings.autotoxic == false
-
+wait()
 end)
 
 movementbla:Toggle("heatseeker speed", function(bool)
-
+wait()
     _G.settings.heatseeker = bool
 
     savesettings()
@@ -704,28 +709,31 @@ movementbla:Toggle("heatseeker speed", function(bool)
     if _G.settings.heatseeker == false then
         humanoid.WalkSpeed = 20
     end
-
+wait()
 end)
 
 combatbla:Toggle("killaura", function(bool)
     _G.settings.killaura = bool
     savesettings()
-    repeat
-        task.wait()
-        if _G.settings.killaura then
-            local lplr = game.Players.LocalPlayer
+     repeat
+         task.wait()
+         if _G.settings.killaura then
+             local lplr = game.Players.LocalPlayer
             local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
-            local e = KnitClient.Controllers.SwordController
+             local e = KnitClient.Controllers.SwordController
             e:swingSwordAtMouse()
-        end
+     
 
+    
+task.wait()
+         end
     until _G.settings.killaura == false
-
+    
 end)
 
 movementbla:Toggle("antiknockback", function(bool)
     _G.settings.antikb = bool
-
+wait()
     repeat
         task.wait()
         local knockbacktable = debug.getupvalue(
@@ -742,33 +750,37 @@ movementbla:Toggle("antiknockback", function(bool)
         knockbacktable["kbDirectionStrength"] = 100
         knockbacktable["kbUpwardStrength"] = 100
     end
-
+wait()
 end)
 
 combatbla:Toggle("reach", function(bool)
+    wait()
     _G.settings.reach = bool
     local swordthingy = require(repstorage.TS.combat["combat-constant"]).CombatConstant
     swordthingy.RAYCAST_SWORD_CHARACTER_DISTANCE = 18
-    if bool == false then
+    if _G.settings.reach == false then
         local swordthingy = require(repstorage.TS.combat["combat-constant"]).CombatConstant
         swordthingy.RAYCAST_SWORD_CHARACTER_DISTANCE = 8
     end
+    wait()
 end)
 
 while _G.settings.reach == true do
     task.wait()
     local swordthingy = require(repstorage.TS.combat["combat-constant"]).CombatConstant
     swordthingy.RAYCAST_SWORD_CHARACTER_DISTANCE = 18
-
+wait()
 end
 
 while _G.settings.antikb == true do
+    wait()
     task.wait()
     local knockbacktable = debug.getupvalue(
         require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
             .calculateKnockbackVelocity, 1)
     knockbacktable["kbDirectionStrength"] = 0
     knockbacktable["kbUpwardStrength"] = 0
+    wait()
 end
 
 if _G.settings.antikb == false then
@@ -786,10 +798,11 @@ while _G.settings.killaura == true do
     local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
     local e = KnitClient.Controllers.SwordController
     e:swingSwordAtMouse()
-
+wait()
 end
 
 while _G.settings.heatseeker == true do
+    wait()
     wait(0.5)
 
     humanoid.WalkSpeed = 72
@@ -798,7 +811,7 @@ while _G.settings.heatseeker == true do
     humanoid.WalkSpeed = 20
 
     wait(0.35)
-
+wait()
 end
 
 local choosePlayer = false -- set true if you want to insult one person only
@@ -838,17 +851,17 @@ while _G.settings.autotoxic == true do
 
     wait()
     insult()
-
+wait()
 end
 
 while _G.settings.nofall == true do
     wait()
     game:GetService("ReplicatedStorage")["rbxts_include"]["node_modules"].net.out["_NetManaged"].GroundHit:FireServer()
-
+wait()
 end
 
-if _G.settings.spammer then
-    repeat
+while _G.settings.spam == true do
+    wait()
         task.wait(3)
 
         task.wait(0.5)
@@ -860,11 +873,12 @@ if _G.settings.spammer then
         }
 
         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
-    until _G.spammer == false
-
+    
+wait()
 end
 
 while _G.settings.sprint == true do
+
     wait()
     local thingthatmakesusprrint = require(
                                        game.Players.LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController
@@ -873,7 +887,7 @@ while _G.settings.sprint == true do
         thingthatmakesusprint:startSprinting()
 
     end
-
+wait()
 end
 
 -- b:Label("Pretty Useless NGL",{
