@@ -83,7 +83,7 @@ local Useless = utility:CreateFolder("useless") -- Creates the folder(U will put
 local combatbla = blatant:CreateFolder("combat") -- Creates the folder(U will put here your buttons,etc)
 
 movement:Toggle("sprint", function(bool)
-wait()
+    wait()
     _G.settings.sprint = bool
     savesettings()
     repeat
@@ -149,7 +149,7 @@ players:Button("ESP", function()
 end)
 
 movementbla:Button("dinoexploit", function()
-wait()
+    wait()
     game:GetService("ReplicatedStorage"):FindFirstChild(
         "events-@easy-games/game-core:shared/game-core-networking@getEvents.Events").useAbility:FireServer("dino_charge")
     task.spawn(function()
@@ -196,7 +196,7 @@ wait()
         bar:Destroy()
     end)
     DinoExploit["ToggleButton"](false)
-wait()
+    wait()
 end)
 
 chat:Toggle("chat spammer", function(bool)
@@ -222,11 +222,11 @@ chat:Toggle("chat spammer", function(bool)
 
         until _G.settings.spam == false
     end
-wait()
+    wait()
 end)
 
 movementbla:Toggle("antifalldamage", function(bool)
-wait()
+    wait()
     _G.settings.nofall = bool
 
     savesettings()
@@ -238,11 +238,11 @@ wait()
         game:GetService("ReplicatedStorage")["rbxts_include"]["node_modules"].net.out["_NetManaged"].GroundHit:FireServer()
 
     until _G.settings.nofall == false
-wait()
+    wait()
 end)
 
 chat:Toggle("spam discord mode", function(bool)
-wait()
+    wait()
     _G.settings.spamdiscord = bool
 
     savesettings()
@@ -270,7 +270,7 @@ Useless:Button("crash ur game", function()
 end)
 
 unblatant:Toggle("AutoBuy", function(bool)
-wait()
+    wait()
     _G.settings.autobuy = bool
 
     savesettings()
@@ -686,11 +686,11 @@ chat:Toggle("auto toxic", function(bool)
 
         Insult()
     until _G.settings.autotoxic == false
-wait()
+    wait()
 end)
 
 movementbla:Toggle("heatseeker speed", function(bool)
-wait()
+    wait()
     _G.settings.heatseeker = bool
 
     savesettings()
@@ -709,31 +709,29 @@ wait()
     if _G.settings.heatseeker == false then
         humanoid.WalkSpeed = 20
     end
-wait()
+    wait()
 end)
 
 combatbla:Toggle("killaura", function(bool)
     _G.settings.killaura = bool
     savesettings()
-     repeat
-         task.wait()
-         if _G.settings.killaura then
-             local lplr = game.Players.LocalPlayer
+    repeat
+        task.wait()
+        if _G.settings.killaura then
+            local lplr = game.Players.LocalPlayer
             local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
-             local e = KnitClient.Controllers.SwordController
+            local e = KnitClient.Controllers.SwordController
             e:swingSwordAtMouse()
-     
 
-    
-task.wait()
-         end
+            task.wait()
+        end
     until _G.settings.killaura == false
-    
+
 end)
 
 movementbla:Toggle("antiknockback", function(bool)
     _G.settings.antikb = bool
-wait()
+    wait()
     repeat
         task.wait()
         local knockbacktable = debug.getupvalue(
@@ -750,7 +748,7 @@ wait()
         knockbacktable["kbDirectionStrength"] = 100
         knockbacktable["kbUpwardStrength"] = 100
     end
-wait()
+    wait()
 end)
 
 combatbla:Toggle("reach", function(bool)
@@ -765,130 +763,138 @@ combatbla:Toggle("reach", function(bool)
     wait()
 end)
 
-while _G.settings.reach == true do
-    task.wait()
-    local swordthingy = require(repstorage.TS.combat["combat-constant"]).CombatConstant
-    swordthingy.RAYCAST_SWORD_CHARACTER_DISTANCE = 18
-wait()
-end
-
-while _G.settings.antikb == true do
-    wait()
-    task.wait()
-    local knockbacktable = debug.getupvalue(
-        require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
-            .calculateKnockbackVelocity, 1)
-    knockbacktable["kbDirectionStrength"] = 0
-    knockbacktable["kbUpwardStrength"] = 0
-    wait()
-end
-
-if _G.settings.antikb == false then
-    local knockbacktable = debug.getupvalue(
-        require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
-            .calculateKnockbackVelocity, 1)
-    knockbacktable["kbDirectionStrength"] = 100
-    knockbacktable["kbUpwardStrength"] = 100
-end
-
-while _G.settings.killaura == true do
-    wait()
-
-    local lplr = game.Players.LocalPlayer
-    local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
-    local e = KnitClient.Controllers.SwordController
-    e:swingSwordAtMouse()
-wait()
-end
-
-while _G.settings.heatseeker == true do
-    wait()
-    wait(0.5)
-
-    humanoid.WalkSpeed = 72
-
-    wait(0.20)
-    humanoid.WalkSpeed = 20
-
-    wait(0.35)
-wait()
-end
-
-local choosePlayer = false -- set true if you want to insult one person only
-local chosenPlayer = "" -- if chosePlayer = true, type playername in quotes
-
-local Taunts = { -- add as many as you wish
-"Imagine Not Being Able To Exploit. Get kersh hub and synapse x", "if you dont exploits your trash", "GET KERSH HUB",
-"Get Lost Loser. get kersh hub if pog", "Imagine Being So Bad, Couldn't be me",
-"Go cry about it like fr even your dad left u because you cry", "i am best", "i am extremely good", "DAMN IM GOOD",
-"Cope harder", "ig im god", "Imagine not having synapse With kersh hub, couldn't be me", "L + Bozo + Idiot",
-"no hersh hub? no life.", "your dad left for the kersh hub."}
-
-local Remote = game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest
-
-local function Insult()
-    local players = game.Players:GetChildren()
-    local howManyPlayers = #players
-
-    local ran = math.random(1, howManyPlayers)
-    local chosenOne = players[ran]
-    local chance = math.random(1, 20)
-
-    if choosePlayer == true then
-        Remote:FireServer(chosenPlayer .. " " .. Taunts[math.random(1, #Taunts)], "All")
-    elseif chance <= 5 then
-        Remote:FireServer(chosenOne.Name .. " " .. Taunts[math.random(1, #Taunts)], "All")
-    else
-        Remote:FireServer(Taunts[math.random(1, #Taunts)], "All")
+for i, v in pairs(library) do
+    for i, v in pairs(v) do
+        if v.func then
+            v.func()
+        end
     end
 end
 
-local randTime = math.random(5, 15)
+-- while _G.settings.reach == true do
+--     task.wait()
+--     local swordthingy = require(repstorage.TS.combat["combat-constant"]).CombatConstant
+--     swordthingy.RAYCAST_SWORD_CHARACTER_DISTANCE = 18
+-- wait()
+-- end
 
-task.wait(randTime)
+-- while _G.settings.antikb == true do
+--     wait()
+--     task.wait()
+--     local knockbacktable = debug.getupvalue(
+--         require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
+--             .calculateKnockbackVelocity, 1)
+--     knockbacktable["kbDirectionStrength"] = 0
+--     knockbacktable["kbUpwardStrength"] = 0
+--     wait()
+-- end
 
-while _G.settings.autotoxic == true do
+-- if _G.settings.antikb == false then
+--     local knockbacktable = debug.getupvalue(
+--         require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
+--             .calculateKnockbackVelocity, 1)
+--     knockbacktable["kbDirectionStrength"] = 100
+--     knockbacktable["kbUpwardStrength"] = 100
+-- end
 
-    wait()
-    insult()
-wait()
-end
+-- while _G.settings.killaura == true do
+--     wait()
 
-while _G.settings.nofall == true do
-    wait()
-    game:GetService("ReplicatedStorage")["rbxts_include"]["node_modules"].net.out["_NetManaged"].GroundHit:FireServer()
-wait()
-end
+--     local lplr = game.Players.LocalPlayer
+--     local KnitClient = debug.getupvalue(require(lplr.PlayerScripts.TS.knit).setup, 6)
+--     local e = KnitClient.Controllers.SwordController
+--     e:swingSwordAtMouse()
+-- wait()
+-- end
 
-while _G.settings.spam == true do
-    wait()
-        task.wait(3)
+-- while _G.settings.heatseeker == true do
+--     wait()
+--     wait(0.5)
 
-        task.wait(0.5)
-        -- Script generated by SimpleSpy - credits to exx#9394
+--     humanoid.WalkSpeed = 72
 
-        local args = {
-            [1] = "kersh hub on top",
-            [2] = "All"
-        }
+--     wait(0.20)
+--     humanoid.WalkSpeed = 20
 
-        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
-    
-wait()
-end
+--     wait(0.35)
+-- wait()
+-- end
 
-while _G.settings.sprint == true do
+-- local choosePlayer = false -- set true if you want to insult one person only
+-- local chosenPlayer = "" -- if chosePlayer = true, type playername in quotes
 
-    wait()
-    local thingthatmakesusprrint = require(
-                                       game.Players.LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController
-    if thingthatmakesusprint.sprinting then
-    else
-        thingthatmakesusprint:startSprinting()
+-- local Taunts = { -- add as many as you wish
+-- "Imagine Not Being Able To Exploit. Get kersh hub and synapse x", "if you dont exploits your trash", "GET KERSH HUB",
+-- "Get Lost Loser. get kersh hub if pog", "Imagine Being So Bad, Couldn't be me",
+-- "Go cry about it like fr even your dad left u because you cry", "i am best", "i am extremely good", "DAMN IM GOOD",
+-- "Cope harder", "ig im god", "Imagine not having synapse With kersh hub, couldn't be me", "L + Bozo + Idiot",
+-- "no hersh hub? no life.", "your dad left for the kersh hub."}
 
-    end
-wait()
-end
+-- local Remote = game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest
+
+-- local function Insult()
+--     local players = game.Players:GetChildren()
+--     local howManyPlayers = #players
+
+--     local ran = math.random(1, howManyPlayers)
+--     local chosenOne = players[ran]
+--     local chance = math.random(1, 20)
+
+--     if choosePlayer == true then
+--         Remote:FireServer(chosenPlayer .. " " .. Taunts[math.random(1, #Taunts)], "All")
+--     elseif chance <= 5 then
+--         Remote:FireServer(chosenOne.Name .. " " .. Taunts[math.random(1, #Taunts)], "All")
+--     else
+--         Remote:FireServer(Taunts[math.random(1, #Taunts)], "All")
+--     end
+-- end
+
+-- local randTime = math.random(5, 15)
+
+-- task.wait(randTime)
+
+-- while _G.settings.autotoxic == true do
+
+--     wait()
+--     insult()
+-- wait()
+-- end
+
+-- while _G.settings.nofall == true do
+--     wait()
+--     game:GetService("ReplicatedStorage")["rbxts_include"]["node_modules"].net.out["_NetManaged"].GroundHit:FireServer()
+-- wait()
+-- end
+
+-- while _G.settings.spam == true do
+--     wait()
+--         task.wait(3)
+
+--         task.wait(0.5)
+--         -- Script generated by SimpleSpy - credits to exx#9394
+
+--         local args = {
+--             [1] = "kersh hub on top",
+--             [2] = "All"
+--         }
+
+--         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+
+-- wait()
+-- end
+
+-- while _G.settings.sprint == true do
+
+--     wait()
+--     local thingthatmakesusprrint = require(
+--                                        game.Players.LocalPlayer.PlayerScripts.TS.controllers.global.sprint["sprint-controller"]).SprintController
+--     if thingthatmakesusprint.sprinting then
+--     else
+--         thingthatmakesusprint:startSprinting()
+
+--     end
+-- wait()
+-- end
 
 -- b:Label("Pretty Useless NGL",{
 --     TextSize = 25; -- Self Explaining
@@ -951,7 +957,7 @@ local yourvariable = b:Label("Pretty Useless NGL",{
 yourvariable:Refresh("Hello") It will only change the text ofc
 ]]
 
-for i, v in pairs(_G.settings) do
-    print(i, v)
-end
+-- for i, v in pairs(_G.settings) do
+--     print(i, v)
+-- end
 
